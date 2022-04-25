@@ -45,6 +45,8 @@ def main():
     
     cbo_pokemon.bind("<<ComboboxSelected>>", handle_poke_select)
 
+    btn_set_desktop = ttk.Button(frm, text="Set as desktop background")
+
     root.mainloop()
 
 main()
