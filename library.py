@@ -16,5 +16,3 @@ def download_image_from_url(img_url, save_path):
                 file.write(img_data)
     else:
         print("failed. Response code", response.status_code)
-
-    
