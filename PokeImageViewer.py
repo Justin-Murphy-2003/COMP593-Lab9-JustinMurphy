@@ -19,9 +19,17 @@ def main():
     app_id = 'pokemon.image.viewer'
     ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(app_id)
     root.iconbitmap(os.path.join(script_dir, 'Poke-Ball.ico'))
+    #configurations for resizing image
+    root.rowconfigure(0, weight=1)
+    root.columnconfigure(0, weight=1)
+    root.minsize(500,600)
 
     frm = ttk.Frame(root)
     frm.grid(sticky=(N,E,W,S))
+    frm.rowconfigure(0, weight=10)
+    frm.rowconfigure(1, weight=1)
+    frm.rowconfigure(2, weight=1)
+    frm.columnconfigure(0, weight=1)
 
     #set default image
     img_poke = PhotoImage(file=os.path.join(script_dir, 'pokeball.png'))
@@ -42,10 +50,18 @@ def main():
         image_path = os.path.join(img_dir, pokemon_name + '.png')
         download_image_from_url(image_url, image_path)
         img_poke['file'] = image_path
+        btn_set_desktop.state(['!disabled'])
     
     cbo_pokemon.bind("<<ComboboxSelected>>", handle_poke_select)
 
-    btn_set_desktop = ttk.Button(frm, text="Set as desktop background")
+    def set_desktop():
+        pokemon_name = cbo_pokemon.get()
+        image_path = os.path.join(img_dir, pokemon_name + '.png')
+        set_image_as_background(image_path)
+
+    btn_set_desktop = ttk.Button(frm, text="Set as desktop background", command=set_desktop)
+    btn_set_desktop.state(['disabled'])
+    btn_set_desktop.grid(row=2, column=0, padx=10, pady=10)
 
     root.mainloop()
 
