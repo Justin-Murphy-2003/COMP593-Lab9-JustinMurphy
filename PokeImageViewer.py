@@ -50,7 +50,7 @@ def main():
     cbo_pokemon.grid(row=1, column=0, padx=10, pady=10)
 
     def handle_poke_select(event):
-        # Retrieve and download Pokemon image when Pokemon is selected in Combobox
+        # Retrieve and download a Preview image of the Pokemon when Pokemon is selected in Combobox
         pokemon_name = cbo_pokemon.get()
         image_url = get_pokemon_image_url(pokemon_name)
         image_path = os.path.join(img_dir, pokemon_name + '.png')
